@@ -1,0 +1,29 @@
+[project]
+name = "airclip"
+version = "0.1.0"
+description = "A secure, peer-to-peer Python utility that instantly synchronizes your clipboard across local devices."
+authors = [
+    {name = "Parneet Sidhu"},
+    {name = "Harmanpreet Sidhu"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pygha>=0.2.1"
+]
+
+[project.scripts]
+air-clip = "airclip.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
