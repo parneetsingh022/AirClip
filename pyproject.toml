@@ -42,7 +42,7 @@ addopts = "--strict-markers"
 target-version = "py311"
 line-length = 88
 # Directories to exclude
-exclude = [".git", ".venv", "build", "dist"]
+exclude = [".git", ".venv", "build", "dist",'.pipe']
 
 [tool.ruff.lint]
 # Enable Pyflakes (F), Pycodestyle (E, W), and Isort (I)
