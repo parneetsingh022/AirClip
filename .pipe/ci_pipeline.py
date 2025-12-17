@@ -57,3 +57,15 @@ def tests():
 
     shell("pip install .[dev]")
     shell("pytest")
+    
+    shell("pytest --cov=pygha --cov-report=xml")
+    
+    uses(
+        "codecov/codecov-action@v5",
+        with_args={
+            "fail_ci_if_error": True,
+            "files": "./coverage.xml",
+            "flags": "unittests",
+            "name": "codecov-umbrella"
+        }
+    )

@@ -18,6 +18,7 @@ dev = [
     "pygha>=0.2.1",
     "ruff>=0.14.0",
     "bandit[toml]>=1.9.0",
+    "mypy>=1.18.0",
 ]
 
 [project.scripts]
