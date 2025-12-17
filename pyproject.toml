@@ -15,6 +15,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0.0",
+    "pytest-cov",
     "pygha>=0.2.1",
     "ruff>=0.14.0",
     "bandit[toml]>=1.9.0",
