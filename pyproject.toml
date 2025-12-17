@@ -15,7 +15,8 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0.0",
-    "pygha>=0.2.1"
+    "pygha>=0.2.1",
+    "ruff>=0.14.0"
 ]
 
 [project.scripts]
@@ -27,3 +28,27 @@ where = ["src"]
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "--strict-markers"
+
+[tool.ruff]
+# Target version for the linter
+target-version = "py311"
+line-length = 88
+# Directories to exclude
+exclude = [".git", ".venv", "build", "dist"]
+
+[tool.ruff.lint]
+# Enable Pyflakes (F), Pycodestyle (E, W), and Isort (I)
+select = ["E", "F", "W", "I", "S"]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+# As we discussed, allow 'assert' in the tests directory
+"tests/*" = ["S101"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["airclip"]
