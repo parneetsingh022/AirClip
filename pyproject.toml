@@ -16,7 +16,8 @@ dependencies = [
 dev = [
     "pytest>=8.0.0",
     "pygha>=0.2.1",
-    "ruff>=0.14.0"
+    "ruff>=0.14.0",
+    "bandit[toml]>=1.9.0",
 ]
 
 [project.scripts]
@@ -52,3 +53,16 @@ ignore = []
 
 [tool.ruff.lint.isort]
 known-first-party = ["airclip"]
+
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true  # Requires functions to have types
+check_untyped_defs = true
+files = ["src"]               # Only check the source code by default
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false # Be less strict in your test files

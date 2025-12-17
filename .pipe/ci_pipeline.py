@@ -22,9 +22,26 @@ default_pipeline(
 @job(name="lint")
 def lint():
     checkout()
-    uses("actions/setup-python@v5", with_args={"python-version": "3.12"})
-    shell("pip install ruff")
+    setup_python()
+    shell("pip install .[dev]")
     shell("ruff check .") # Fast failure if code is messy
+
+@job(name="security")
+def security():
+    checkout()
+    setup_python()
+    # Bandit needs the [toml] extra to read your pyproject.toml
+    shell("pip install .[dev]")
+    shell("bandit -r src/ -c pyproject.toml")
+
+
+@job(name="types")
+def types():
+    checkout()
+    setup_python()
+    shell("pip install .[dev]")
+    echo("Running MyPy Type Check...")
+    shell("mypy") # It will automatically use settings from pyproject.toml
 
 @job(
     name="tests",
