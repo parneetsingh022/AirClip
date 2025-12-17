@@ -20,6 +20,7 @@ dev = [
     "ruff>=0.14.0",
     "bandit[toml]>=1.9.0",
     "mypy>=1.18.0",
+    "pre-commit",
 ]
 
 [project.scripts]
@@ -64,7 +65,10 @@ warn_unused_configs = true
 disallow_untyped_defs = true  # Requires functions to have types
 check_untyped_defs = true
 files = ["src"]               # Only check the source code by default
+explicit_package_bases = true
 
 [[tool.mypy.overrides]]
 module = "tests.*"
-disallow_untyped_defs = false # Be less strict in your test files
+disallow_untyped_defs = false    # Don't require "-> None" for every test
+disallow_incomplete_defs = false # Don't complain if a test isn't fully typed
+check_untyped_defs = true        # STILL check the logic inside the test

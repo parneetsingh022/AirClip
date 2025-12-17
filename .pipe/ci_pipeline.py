@@ -6,7 +6,7 @@ SUPPORTED_OS =  ["ubuntu-latest", "macos-latest", "windows-latest"]
 
 def setup_python(version="3.12"):
     uses(
-        "actions/setup-python@v5", 
+        "actions/setup-python@v5",
         with_args={
             "python-version": version,
             "cache": "pip"
@@ -57,9 +57,9 @@ def tests():
 
     shell("pip install .[dev]")
     shell("pytest")
-    
+
     shell("pytest --cov=pygha --cov-report=xml")
-    
+
     uses(
         "codecov/codecov-action@v5",
         with_args={
