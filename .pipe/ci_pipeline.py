@@ -58,14 +58,16 @@ def tests():
     shell("pip install .[dev]")
     shell("pytest")
 
-    shell("pytest --cov=pygha --cov-report=xml")
+    shell("pytest --cov=airclip --cov-report=xml")
 
     uses(
         "codecov/codecov-action@v5",
         with_args={
+            "token": "${{ secrets.CODECOV_TOKEN }}",
             "fail_ci_if_error": True,
             "files": "./coverage.xml",
-            "flags": "unittests",
-            "name": "codecov-umbrella"
+
+            "flags": "${{matrix.os}},${{matrix.python}}",
+            "name": "airclip-tests"
         }
     )
