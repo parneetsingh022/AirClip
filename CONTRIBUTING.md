@@ -42,11 +42,13 @@ pytest
 
 2. **Implement and Test**: Develop your changes and include corresponding tests to verify the new logic or fix.
 
-3. **Commit Changes**: Ensure your changes pass the local pre-commit hooks (trailing whitespace, Ruff, and MyPy).
+3. **Update the Changelog**: For every change, you must update the `CHANGELOG.md` file with a brief description of your updates under the "Unreleased" section.
 
-4. **Submit PR**: Open a Pull Request against the main branch.
+4. **Commit Changes**: Ensure your changes pass the local pre-commit hooks (trailing whitespace, Ruff, and MyPy).
 
-5. **Review**: Once the CI pipeline passes, a maintainer will review your changes.
+5. **Submit PR**: Open a Pull Request against the main branch.
+
+6. **Review**: Once the CI pipeline passes, a maintainer will review your changes.
 
 ## License
 By contributing to AirClip, you agree that your contributions will be licensed under the Apache License 2.0.
