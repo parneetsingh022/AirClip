@@ -1,17 +1,9 @@
 from pygha import default_pipeline, job
-from pygha.steps import uses, checkout, echo, shell
+from pygha.steps import uses, checkout, echo, run, setup_python
 
 PYTHON_VERSIONS = ["3.11", "3.12", "3.13", "3.14"]
+DEFAULT_PYTHON_VERSION = "3.12"
 SUPPORTED_OS =  ["ubuntu-latest", "macos-latest", "windows-latest"]
-
-def setup_python(version="3.12"):
-    uses(
-        "actions/setup-python@v5",
-        with_args={
-            "python-version": version,
-            "cache": "pip"
-        }
-    )
 
 default_pipeline(
     on_pull_request=['main'],
@@ -22,26 +14,26 @@ default_pipeline(
 @job(name="lint")
 def lint():
     checkout()
-    setup_python()
-    shell("pip install .[dev]")
-    shell("ruff check .") # Fast failure if code is messy
+    setup_python(DEFAULT_PYTHON_VERSION, cache="pip")
+    run("pip install .[dev]")
+    run("ruff check .") # Fast failure if code is messy
 
 @job(name="security")
 def security():
     checkout()
-    setup_python()
+    setup_python(DEFAULT_PYTHON_VERSION, cache="pip")
     # Bandit needs the [toml] extra to read your pyproject.toml
-    shell("pip install .[dev]")
-    shell("bandit -r src/ -c pyproject.toml")
+    run("pip install .[dev]")
+    run("bandit -r src/ -c pyproject.toml")
 
 
 @job(name="types")
 def types():
     checkout()
-    setup_python()
-    shell("pip install .[dev]")
+    setup_python(DEFAULT_PYTHON_VERSION, cache="pip")
+    run("pip install .[dev]")
     echo("Running MyPy Type Check...")
-    shell("mypy") # It will automatically use settings from pyproject.toml
+    run("mypy") # It will automatically use settings from pyproject.toml
 
 @job(
     name="tests",
@@ -53,12 +45,12 @@ def tests():
     echo("Testing ${{matrix.python}} on ${{matrix.os}}")
 
     checkout()
-    setup_python("${{matrix.python}}")
+    setup_python("${{matrix.python}}", cache="pip")
 
-    shell("pip install .[dev]")
-    shell("pytest")
+    run("pip install .[dev]")
+    run("pytest")
 
-    shell("pytest --cov=airclip --cov-report=xml")
+    run("pytest --cov=airclip --cov-report=xml")
 
     uses(
         "codecov/codecov-action@v5",
