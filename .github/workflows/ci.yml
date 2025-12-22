@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
@@ -21,7 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
@@ -31,7 +33,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
@@ -56,7 +59,8 @@ jobs:
     steps:
       - run: echo "Testing ${{matrix.python}} on ${{matrix.os}}"
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: ${{matrix.python}}
           cache: pip

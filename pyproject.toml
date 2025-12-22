@@ -16,7 +16,7 @@ dependencies = [
 dev = [
     "pytest>=8.0.0",
     "pytest-cov",
-    "pygha>=0.2.1",
+    "pygha>=0.3.1",
     "ruff>=0.14.0",
     "bandit[toml]>=1.9.0",
     "mypy>=1.18.0",
